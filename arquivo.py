@@ -10,16 +10,15 @@ def generated_image():
     image = np.zeros((altura, largura, 3), dtype=np.uint8)
     return image
 
-def mostraVariavel(imagem, nome):
+def mostraVariavel(imagem, nome, email):
+    # Percorrendo a imagem
     for y in range(0, altura):
         for x in range(0, largura):
             # if x > 250:
-            #     cv2.rectangle(imagem, (0, 0), (x, y), (0, 255, 255), -1)
+            #     cv2.rectangle(imagem, (0, 0), (x, y), (0, 0, 0), -1)
             # elif x < 250:
-                cv2.rectangle(imagem, (0, 0), (x, y), (0,128,0), -1)
+            #     cv2.rectangle(imagem, (0, 0), (x, y), (0,255,0), -1)
 
-    # Preenche o fundo de amarelo
-    # cv2.rectangle(imagem, (0, 0), (largura, altura), (0, 255, 255), -1)
     # Desenha o texto com a variavel em preto, no centro
     fonte = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
     escala = 1
@@ -29,13 +28,16 @@ def mostraVariavel(imagem, nome):
     tamanho, _ = cv2.getTextSize(nome, fonte, escala, grossura)
 
     # Desenha o texto no centro
-    cv2.putText(imagem, nome, (int(largura / 2 - tamanho[0] / 2), int(altura / 2 + tamanho[1] / 2)), fonte, escala, (255, 255, 255), grossura)
+    cv2.putText(imagem, nome, (int(largura / 2 - tamanho[0] / 2), 125), fonte, escala, (255, 255, 255), grossura)
+    cv2.putText(imagem, email, (int(largura / 2 - tamanho[0] / 2), 375), fonte, escala, (255, 255, 255), grossura)
     # cv2.putText(imagem, texto, (int(largura / 2 - tamanho[0] / 2), 450), fonte, escala, (0, 0, 0), grossura)
     cv2.imwrite("teste.jpg", imagem)
 
 if __name__ == '__main__':
     image = generated_image()
-    mostraVariavel(image, 'Lucas Eduardo de Oliveira Santos')
+    nome = 'Lucas Eduardo de Oliveira Santos'
+    email = 'lucas.oliveira@aluno.unincor.edu.br'
+    mostraVariavel(image, nome, email)
 
 # import cv2
 # import numpy as np
