@@ -1,37 +1,41 @@
 import numpy as np
 import cv2
 
-def mostraVariavel(nome, valor):
-    # Cria uma imagem nova (tamanho 400x200 e 3 canais RGB)
-    largura = 500
-    altura = 500
-    imagem = np.zeros((altura, largura, 3), dtype=np.uint8)
+# Tamanho padrão da imagem
+largura = 500
+altura = 500
 
+def generated_image():
+    # Cria uma nova imagem(500x500 e 3 canais RGB)
+    image = np.zeros((altura, largura, 3), dtype=np.uint8)
+    return image
+
+def mostraVariavel(imagem, nome):
     for y in range(0, altura):
         for x in range(0, largura):
-            if x > 250:
-                cv2.rectangle(imagem, (0, 0), (x, y), (0, 255, 255), -1)
-            elif x < 250:
-                cv2.rectangle(imagem, (0, 0), (x, y), (255, 255, 255), -1)
+            # if x > 250:
+            #     cv2.rectangle(imagem, (0, 0), (x, y), (0, 255, 255), -1)
+            # elif x < 250:
+                cv2.rectangle(imagem, (0, 0), (x, y), (0,128,0), -1)
 
     # Preenche o fundo de amarelo
     # cv2.rectangle(imagem, (0, 0), (largura, altura), (0, 255, 255), -1)
     # Desenha o texto com a variavel em preto, no centro
-    texto = '{}'.format(nome, valor)
     fonte = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
     escala = 1
-    grossura = 3
+    grossura = 2
+
     # Pega o tamanho (altura e largura) do texto em pixels
-    tamanho, _ = cv2.getTextSize(texto, fonte, escala, grossura)
+    tamanho, _ = cv2.getTextSize(nome, fonte, escala, grossura)
 
     # Desenha o texto no centro
-    cv2.putText(imagem, texto, (int(largura / 2 - tamanho[0] / 2), int(altura / 2 + tamanho[1] / 2)), fonte, escala, (0, 0, 0), grossura)
+    cv2.putText(imagem, nome, (int(largura / 2 - tamanho[0] / 2), int(altura / 2 + tamanho[1] / 2)), fonte, escala, (255, 255, 255), grossura)
     # cv2.putText(imagem, texto, (int(largura / 2 - tamanho[0] / 2), 450), fonte, escala, (0, 0, 0), grossura)
     cv2.imwrite("teste.jpg", imagem)
 
 if __name__ == '__main__':
-    a = 15
-    mostraVariavel('Yara Hellen Silvestre', a)
+    image = generated_image()
+    mostraVariavel(image, 'Lucas Eduardo de Oliveira Santos')
 
 # import cv2
 # import numpy as np
